@@ -14,7 +14,15 @@ public class File extends FolderItem {
         }  
         this.extension = initialExtension;  
         this.size = initialSize;  
-    }  
+    }
+    public File(String name, String indent, int size) {
+    super(name, indent);
+    this.size = size;
+    }
+
+public int getSize() {
+    return size;
+}
   
     public String getExtension() {  
         return extension;  

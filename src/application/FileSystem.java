@@ -38,6 +38,8 @@ public class FileSystem {
 		java.io.File[] files = file.listFiles();
 
 		if (files != null) {
+			//累加文件夹内所有文件的总大小
+			int totalSize = 0;
 
 			/**
 			 * Recursive printout all folder items of the current folder by
@@ -61,6 +63,7 @@ public class FileSystem {
 				if (f.isFile()) {
 					folderItem = new File(f.getName(), "  ", (int) f.length());
 					folder.addFolderItem(folderItem);
+					totalSize += f.length();
 				}
 				if (f.isDirectory()) {
 					folderItem = new Folder(f.getName());
@@ -76,6 +79,7 @@ public class FileSystem {
 			 */
 			System.out.println(folder.getName());
 			printFolderItems(folder, "--");
+			System.out.println("Total size of all files:" + totalSize + "bytes");
 		}
 	}
 

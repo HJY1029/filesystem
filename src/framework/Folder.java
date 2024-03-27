@@ -9,7 +9,8 @@ public class Folder extends FolderItem {
   
 	public Folder(String initialName) {  
 		super(initialName, isFolder());  
-		folderItems = new ArrayList<FolderItem>();  
+		folderItems = new ArrayList<FolderItem>();
+		totalSize = 0;
 	}  
   
 	public List<FolderItem> getFolderItems() {  
@@ -18,12 +19,14 @@ public class Folder extends FolderItem {
   
 	public void addFolderItem(FolderItem item) {  
 		if (item != null) {  
-			folderItems.add(item);  
+			folderItems.add(item);
+			totalSize += item.getSize();//更新文件总大小
 		}  
 	}  
   
 	public boolean removeFolderItem(FolderItem item) {  
-		if (item != null && folderItems.contains(item)) {  
+		if (item != null && folderItems.contains(item)) {
+			totalSize -= item.getSize(); // 更新文件夹总大小
 			return folderItems.remove(item);  
 		}  
 		return false;  
@@ -38,5 +41,8 @@ public class Folder extends FolderItem {
   
 	public int getNumberOfFolderItems() {  
 		return folderItems.size();  
-	}  
+	}
+	public int getTotalSize(){
+	return totalSize;
+        }
 }

@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;  
   
 public class Folder extends FolderItem {  
-	private List<FolderItem> folderItems;  
+	private List<FolderItem> folderItems;
+	private int totalSize;
   
 	public Folder(String initialName) {  
 		super(initialName, isFolder());  

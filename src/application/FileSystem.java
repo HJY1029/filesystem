@@ -20,7 +20,7 @@ public class FileSystem {
 		/** Get specified path and printout it */
 //		String path = "D:\\testFileSystem";
 		
-		System.out.println(path);
+		System.out.println("Current Path:" + path);
 
 		/** Get the folder name */
 		StringTokenizer tokenizer = new StringTokenizer(path, "\\");

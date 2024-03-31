@@ -20,7 +20,7 @@ public class FileSystem {
 		/** Get specified path and printout it */
 //		String path = "D:\\testFileSystem";
 		
-		System.out.println(path);
+		System.out.println("Current Path:" + path);
 
 		/** Get the folder name */
 		StringTokenizer tokenizer = new StringTokenizer(path, "\\");
@@ -38,6 +38,8 @@ public class FileSystem {
 		java.io.File[] files = file.listFiles();
 
 		if (files != null) {
+			//累加文件夹内所有文件的总大小
+			int totalSize = 0;
 
 			/**
 			 * Recursive printout all folder items of the current folder by
@@ -55,16 +57,28 @@ public class FileSystem {
 			 * and java.io.File
 			 * 
 			 */
+			// 创建一个名为folderName的Folder对象 
 			Folder folder = new Folder(folderName);
+			// 遍历files数组或集合中的每一个文件对象  
 			for (java.io.File f : files) {
 				FolderItem folderItem;
+				// 如果当前文件对象f是一个普通文件 
 				if (f.isFile()) {
-					folderItem = new File(f.getName(), "  ", (int) f.length());
+					// 创建一个File类型的folderItem，名称是文件的名称，扩展名是空格，大小是文件的长度  
+				    folderItem = new File(f.getName(), "  ", (int) f.length());
+				    // 将这个folderItem添加到folder中 
 					folder.addFolderItem(folderItem);
+					// 将文件的长度累加到totalSize变量中  
+					totalSize += f.length();
 				}
+				// 如果当前文件对象f是一个目录
 				if (f.isDirectory()) {
+					// 创建一个名为f.getName()的Folder类型的folderItem 
 					folderItem = new Folder(f.getName());
+					// 将这个folderItem添加到folder中
 					folder.addFolderItem(folderItem);
+					// 递归调用constructFolderItems方法，传入当前目录f和作为参数传入的folderItem（强制转型为Folder类型）  
+			        // 这样会进一步处理该目录下的所有子文件和子目录
 					constructFolderItems(f, (Folder) folderItem);
 				}
 			}
@@ -76,6 +90,7 @@ public class FileSystem {
 			 */
 			System.out.println(folder.getName());
 			printFolderItems(folder, "--");
+			System.out.println("Total size of all files:" + totalSize + "bytes");
 		}
 	}
 
@@ -133,7 +148,8 @@ public class FileSystem {
 	public static void printFolderItems(Folder f, String indent) {
 		for (FolderItem item : f.getFolderItems()) {
 			System.out.println(indent + item.getName());
-			if (item instanceof Folder) {
+			if (item instanceof Folder)//检查对象 item 是否是 Folder 类或其子类的实例 
+				{
 				String indentTemp = indent + "--";
 				printFolderItems((Folder) item, indentTemp);
 			}

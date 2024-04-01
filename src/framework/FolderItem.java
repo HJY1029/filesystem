@@ -20,7 +20,11 @@ public class FolderItem {
   
     // 可以添加其他构造器  
   
-    public String getName() {  
+    public FolderItem(String initialName) {
+		// TODO Auto-generated constructor stub
+	}
+
+	public String getName() {  
         return name;  
     }  
   

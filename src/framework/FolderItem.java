@@ -21,7 +21,10 @@ public class FolderItem {
     // 可以添加其他构造器  
   
     public FolderItem(String initialName) {
-		// TODO Auto-generated constructor stub
+    	this.name = initialName;  
+        FolderItem.isFolder = false; // 假设这个构造器是用于非文件夹的项  
+        this.creationTime = new Date(); // 默认为当前时间  
+        this.lastModifiedTime = new Date(); // 默认为当前时间  
 	}
 
 	public String getName() {  

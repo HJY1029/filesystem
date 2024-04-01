@@ -1,47 +1,49 @@
 package framework;  
   
-public class File extends FolderItem {  
-    private String extension;  
-    private final long size;  
+import java.util.ArrayList;  
+import java.util.List;  
   
-    public File(String initialName, String initialExtension, long initialSize) {  
-        super(initialName, false); // 假设File类代表文件，不是文件夹  
-        if (initialExtension == null || initialExtension.isEmpty()) {  
-            throw new IllegalArgumentException("Extension cannot be null or empty.");  
-        }  
-        if (initialSize < 0) {
-            throw new IllegalArgumentException("Size cannot be negative.");  
-        }  
-        this.extension = initialExtension;  
-        this.size = initialSize;  
-    }
-    public File(String name, boolean indent, int size) {
-    super(name, indent);
-	this.extension = "";
-    this.size = size;
-    }
-
+public class Folder extends FolderItem {  
+	private List<FolderItem> folderItems;
+	private int totalSize;
   
-    public String getExtension() {  
-        return extension;  
-    }  
+	public Folder(String initialName) {  
+		super(initialName, isFolder());  // 调用父类的构造方法，传入初始名称和是否是文件夹的标识（通过isFolder()方法获取）。  
+		// 初始化folderItems列表，用于存储文件夹中的项目（FolderItem）。
+		folderItems = new ArrayList<FolderItem>();
+		totalSize = 0;
+	}  
   
-    public long getSize() {  
-        return size;  
-    }  
-    public void setExtension(String newExtension) {
-		extension = newExtension;
+	public List<FolderItem> getFolderItems() {  
+		return new ArrayList<>(folderItems); // 返回副本以避免外部修改  
+	}  
+  
+	public void addFolderItem(FolderItem item) {  
+		if (item != null) {  
+			folderItems.add(item);
+			totalSize += item.getSize();//更新文件总大小
+		}  
+	}  
+  
+	public boolean removeFolderItem(FolderItem item) {  
+		if (item != null && folderItems.contains(item)) {
+			totalSize -= item.getSize(); // 更新文件夹总大小
+			return folderItems.remove(item);  
+		}  
+		return false;  
+	}  
+  
+	public FolderItem getFolderItem(int index) {  
+		if (index >= 0 && index < folderItems.size()) {  
+			return folderItems.get(index);  
+		}  
+		return null; // 或者抛出异常  
+	}  
+  
+	public int getNumberOfFolderItems() {  
+		return folderItems.size();  
 	}
-    public boolean isFolder() {  
-        return false; // 明确返回false，表示这是一个文件而不是文件夹  
-    }  
-  
-    @Override  
-    public String toString() {  
-        return "File{" +  
-                "name='" + getName() + '\'' +  
-                ", extension='" + extension + '\'' +  
-                ", size=" + size +  
-                '}';  
-    }  
+	public int getTotalSize(){
+	return totalSize;
+        }
 }

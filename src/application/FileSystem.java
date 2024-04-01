@@ -12,6 +12,9 @@ import framework.FolderItem;
 
 public class FileSystem {
 
+	//创建哈希表
+	public static Map<Integer, FolderItem> hashMap = new HashMap<>();
+	
 	/**
 	 * The main function try to use <code>File<code>, <code>Folder<code> 
 	 * and <code>FolderItem<code> and comparing with using class java.io.File
@@ -73,7 +76,7 @@ public class FileSystem {
 			// 使用自定义框架递归构建包含所有文件项的Folder对象   
 			Folder folder = new Folder(folderName);
 			// 创建哈希表
-			Map<Integer, FolderItem> hashMap = new HashMap<>();
+			//Map<Integer, FolderItem> hashMap = new HashMap<>();
 
 			for (java.io.File f : files) {
 			    FolderItem folderItem;
@@ -152,6 +155,9 @@ public class FileSystem {
 				folderItem = new File(i.getName(), "  ", (int) i.length());
 				// 将folderItem添加到folder中  
 				folder.addFolderItem(folderItem);
+
+				//将哈希值添加到哈希表中
+				hashMap.put(i.hashCode(), folderItem);
 			}
 			// 如果i是目录，则创建一个Folder类型的folderItem  
 			if (i.isDirectory()) { 

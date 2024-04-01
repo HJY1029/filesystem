@@ -112,20 +112,28 @@ public class FileSystem {
 			
 	        // 提示用户输入哈希码
 	        @SuppressWarnings("resource")
+	       
 			Scanner scanner = new Scanner(System.in);
-	        System.out.print("请输入哈希码以显示对应的文件：");
-	        hashCode = scanner.nextInt();
-	        
-	        // 根据哈希码查找文件对象并输出
-	        FolderItem file2 = hashMap.get(hashCode);
-	        if (file2 != null) {
-	            System.out.println("找到哈希码对应的文件：" + file2.getName());
-	        } else {
-	            System.out.println("未找到对应的文件，请输入有效的哈希码。");
+	        while (toChar(scanner) != 'q')
+	        {
+	        	System.out.print("请输入哈希码以显示对应的文件：");
+		        hashCode = scanner.nextInt();
+		        // 根据哈希码查找文件对象并输出
+		        FolderItem file2 = hashMap.get(hashCode);
+		        if (file2 != null) {
+		            System.out.println("找到哈希码对应的文件：" + file2.getName());
+		        } else {
+		            System.out.println("未找到对应的文件，请输入有效的哈希码。");
+		        }
 	        }
 		}
 	}
 	
+	private static char toChar(Scanner scanner) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 	/**
 	 * Recursive construct <code>folder<coder> object of one folder 
 	 * by using <code>File<code>, <code>Folder<code> and <code>FolderItem<code>

@@ -8,7 +8,8 @@ public class Folder extends FolderItem {
 	private int totalSize;
   
 	public Folder(String initialName) {  
-		super(initialName, isFolder());  
+		super(initialName);  //, isFolder() 调用父类的构造方法，传入初始名称和是否是文件夹的标识（通过isFolder()方法获取）。  
+		// 初始化folderItems列表，用于存储文件夹中的项目（FolderItem）。
 		folderItems = new ArrayList<FolderItem>();
 		totalSize = 0;
 	}  

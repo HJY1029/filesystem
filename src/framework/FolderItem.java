@@ -4,16 +4,16 @@ import java.util.Date;
   
 public class FolderItem {  
     private String name;  
-    protected boolean isFolder;  
+    protected static boolean isFolder;  
     private FolderItem parent; // 父文件夹  
     private long size; // 文件大小（如果是文件）  
     private Date creationTime; // 创建时间  
     private Date lastModifiedTime; // 最后修改时间  
     // 可以添加更多字段，如权限等  
   
-    public FolderItem(String name, boolean isFolder) {  
+    public FolderItem(String name, boolean b) {  
         this.name = name;  
-        this.isFolder = isFolder;  
+        FolderItem.isFolder = b;  
         this.creationTime = new Date(); // 默认为当前时间  
         this.lastModifiedTime = new Date(); // 默认为当前时间  
     }  

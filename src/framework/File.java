@@ -68,6 +68,7 @@ public class File extends FolderItem {
                 "name='" + getName() + '\'' +  // 获取并拼接文件名称  
                 ", extension='" + extension + '\'' +  // 获取并拼接文件扩展名  
                 ", size=" + size +  // 获取并拼接文件大小  
+                ", hashcode=" + hashCode() +    //获取并拼接文件哈希值
                 '}';    
     }    
 }
